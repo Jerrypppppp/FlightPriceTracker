@@ -1,0 +1,20 @@
+# Build output
+build/
+
+# Local database (generated at runtime)
+SQLite/*.db
+SQLite/*.db-journal
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Compiled binaries
+FlightPriceTracker
+*.o
+*.out
