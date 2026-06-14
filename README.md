@@ -2,6 +2,93 @@
 
 大學期末專題 — 使用 C++17 開發的航班價格追蹤網站。
 
+**Repository：** https://github.com/Jerrypppppp/FlightPriceTracker
+
+---
+
+## 快速開始（Clone 與安裝）
+
+### 1. 克隆專案
+
+```bash
+git clone https://github.com/Jerrypppppp/FlightPriceTracker.git
+cd FlightPriceTracker
+```
+
+### 2. 安裝相依套件（macOS）
+
+需先安裝 [Homebrew](https://brew.sh/)，再執行：
+
+```bash
+brew install cmake asio
+```
+
+| 套件 | 用途 |
+|------|------|
+| `cmake` | 建置工具 |
+| `asio` | Crow 框架網路依賴 |
+| `sqlite3` | macOS 通常已內建，無需額外安裝 |
+
+> 首次執行 `cmake ..` 時會自動下載 **Crow** 與 **nlohmann/json**，需保持網路連線，約需 5～10 分鐘。
+
+### 3. 編譯
+
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```
+
+編譯成功後會產生可執行檔 `FlightPriceTracker`。
+
+### 4. 執行
+
+```bash
+./FlightPriceTracker
+```
+
+終端機出現以下訊息即代表啟動成功：
+
+```
+Flight Price Tracker running at http://localhost:8080
+```
+
+### 5. 開啟網頁
+
+在瀏覽器開啟：
+
+**http://localhost:8080**
+
+| 頁面 | 網址 |
+|------|------|
+| Dashboard | http://localhost:8080 |
+| 航班管理 | http://localhost:8080/flights |
+| 價格分析 | http://localhost:8080/analysis |
+| 統計 | http://localhost:8080/statistics |
+
+### 6. 停止伺服器
+
+在執行 `./FlightPriceTracker` 的終端機按 **`Ctrl + C`**。
+
+---
+
+## 常見問題
+
+**Q：`cmake: command not found`**  
+→ 執行 `brew install cmake`
+
+**Q：編譯時出現 `Could NOT find asio`**  
+→ 執行 `brew install asio` 後重新 `cmake ..`
+
+**Q：Port 8080 已被占用**  
+→ 關閉占用 8080 的程式，或修改 `main.cpp` 中的 port 後重新編譯
+
+**Q：資料存在哪？**  
+→ 首次執行會在 `build/SQLite/flights.db` 建立資料庫（需在 `build/` 目錄下執行程式）
+
+---
+
 ## 功能特色
 
 - **Dashboard**：航班總數、平均價格、最低價、優惠通知、優惠排行榜
@@ -18,28 +105,20 @@
 | 層級 | 技術 |
 |------|------|
 | 後端 | C++17, Crow Framework, SQLite, nlohmann/json |
-| 前端 | HTML5, Bootstrap 5, JavaScript, Fetch API |
+| 前端 | HTML5, Bootstrap 5, JavaScript, Fetch API, Chart.js |
 
 ## 系統需求
 
-- macOS (Apple Silicon / Intel)
+- macOS 12+（Apple Silicon M 系列 / Intel 皆可）
 - CMake 3.16+
-- SQLite3（macOS 內建）
-- 網路連線（首次編譯需下載 Crow 與 nlohmann/json）
+- C++17 編譯器（Xcode Command Line Tools）
+- 網路連線（首次編譯）
 
-## 編譯與執行
+安裝 Xcode Command Line Tools（若尚未安裝）：
 
 ```bash
-mkdir build
-cd build
-cmake ..
-make
-./FlightPriceTracker
+xcode-select --install
 ```
-
-啟動後在瀏覽器開啟：
-
-**http://localhost:8080**
 
 ## 專案結構
 
@@ -53,7 +132,7 @@ FlightPriceTracker/
 ├── database/                 # SQLite 初始化
 ├── templates/                # HTML 頁面
 ├── static/                   # CSS, JS
-└── SQLite/                   # 資料庫檔案（執行時自動建立）
+└── SQLite/                   # 資料庫目錄（執行時自動建立）
 ```
 
 ## REST API
@@ -77,7 +156,8 @@ FlightPriceTracker/
 
 ## 模擬資料
 
-首次啟動會自動建立 6 筆示範航班（含 CI100 價格歷史：8500 → 8200 → 6900）。
+首次啟動會自動建立 6 筆示範航班（含 CI100 價格歷史：8500 → 8200 → 6900）。  
+**資料為模擬資料，非真實航空公司 API。**
 
 ## 授權
 
