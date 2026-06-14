@@ -1,6 +1,6 @@
 # Flight Price Tracker（航班價格追蹤系統）
 
-大學期末專題 — 使用 C++17 開發的航班價格追蹤網站。
+C++期末專題 — 使用 C++17 開發的航班價格追蹤網站。
 
 **Repository：** https://github.com/Jerrypppppp/FlightPriceTracker
 
